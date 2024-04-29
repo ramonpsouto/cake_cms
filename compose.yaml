@@ -4,7 +4,7 @@ services:
     #build do container (usa a imagem gerada como imagem do container)
     build:
       #caminho do Dockerfile
-      context: ./
+      context: .
     image: backend
     #bind das portas
     ports:
@@ -13,7 +13,7 @@ services:
     working_dir: /var/www/html
     #bind do diretório host para o container
     volumes:
-      - ./:/var/www/html
+      - .:/var/www/html
     #comando que será executado ao iniciar o container
     command: php -S 0.0.0.0:8000
     #dependência do container
@@ -26,3 +26,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
